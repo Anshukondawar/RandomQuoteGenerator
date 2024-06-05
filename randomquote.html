@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Poppins:wght@900&display=swap" rel="stylesheet">
+</head>
+<style>
+    
+    body{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: rgb(135, 115, 155);
+        background: url(abstract-purple-watercolor-background_23-2149036193.avif);
+        background-size:cover;
+        background-repeat: no-repeat;
+       height: 70vh;
+       width: 97vw;
+      
+    }
+    h2{
+        margin-top: 30vh;
+        text-align: center;
+        color: rgb(14, 8, 17);
+        font-weight: 500;
+        text-shadow: 2px 2px rgb(73, 42, 92);
+        
+    }
+    #quote{
+  text-align: center;
+  position: relative;
+  font-size: 38px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+  -webkit-text-stroke: 0.4px white;
+       color: transparent;
+       background-image: linear-gradient( rgb(133, 90, 160), rgb(162, 123, 185));
+       background-repeat: no-repeat;
+       -webkit-background-clip: text;
+       background-position:-2000px 0px;
+       animation: change 4s ease-in infinite ;
+       
+    }
+    #author{
+        display: flex;
+        justify-content: space-around;
+        font-size:  18px;
+       color: rgb(14, 8, 17);
+       font-weight: 500;
+       text-shadow: 1px 1px rgb(73, 42, 92);
+       
+    }
+    @keyframes change{
+       0%{
+       
+        background-image: linear-gradient(rgb(73, 42, 92),rgb(73, 42, 92));
+      
+        }
+        100%{
+            background-position: 0 0;
+
+        }
+    }
+</style>
+<body onload="loading()">
+    <h2> GENERATION OF RANDOM QUOTES</h2>
+    <div>
+    <p id="quote"></p>
+    <p id="author"></p>
+</div>
+
+
+<script>
+ async function loading(){
+    const quote=document.getElementById('quote')
+    const author=document.getElementById('author')
+    try{
+        let api= await fetch( "https://api.quotable.io/random")
+        let data=await api.json()
+        display(data)
+          }
+          catch(err){
+      console.log('no such word found',err)
+          }
+        
+}
+function display(data){
+    const quote=document.getElementById('quote')
+    const author=document.getElementById('author')
+    const word=data.content
+    console.log(word)
+    quote.innerHTML=`"${word}"`
+    const word1=data.author
+    author.innerHTML=`- ${word1}`
+
+
+}
+</script>
+</body>
+</html>
